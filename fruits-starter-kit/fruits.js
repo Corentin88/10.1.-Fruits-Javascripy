@@ -1,13 +1,14 @@
 let fruits = [{ name: "Orange", image: "orange.jpg" },
-{ name: "Kiwi", image: "kiwi.jpg" },
-{ name: "Banane", image: "banane.jpg" },
-{ name: "Peche", image: "peche.jpg" },
-{ name: "Cerise", image: "cerise.jpg" }];
+            { name: "Kiwi", image: "kiwi.jpg" },
+            { name: "Banane", image: "banane.jpg" },
+            { name: "Peche", image: "peche.jpg" },
+            { name: "Cerise", image: "cerise.jpg" }];
 
 
 let button = document.getElementById("fruits");
 let imageContainer = document.getElementById("imageFruit");
-let clickedButton = null;
+let imageContainer2 = document.querySelector('.imageChanger');
+let currentImage = getComputedStyle(imageContainer2).backgroundImage;
 
 
 fruits.forEach((fruit) => {
@@ -24,13 +25,13 @@ fruits.forEach((fruit) => {
         });
         div.style.backgroundColor = "red"
         imageContainer.style.backgroundImage = `url(${fruit.image})`;
-        clikedButton = fruit;
+        
     });
 
     div.addEventListener("mouseout", () => {
         let allButtons = document.querySelectorAll('.boutonFruits');
-        if (clikedButton){
-            imageContainer.style.backgroundImage = `url(${clickedButton.image})`;
+        if (!div.style.backgroundColor || div.style.backgroundColor === 'gray') {
+            imageContainer.style.backgroundImage = currentImage;
         }
         
         
@@ -40,7 +41,14 @@ fruits.forEach((fruit) => {
         let allButtons = document.querySelectorAll('.boutonFruits');
         imageContainer.style.backgroundImage = `url(${fruit.image})`;
     });
+
     
 
     button.appendChild(div);
+});
+
+imageContainer.addEventListener("mouseleave", () => {
+    if (!clickedFruit) {
+        imageContainer.style.backgroundImage = `url(${defaultImage})`;
+    }
 });
